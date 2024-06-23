@@ -21,9 +21,9 @@
             </div>
         </div>
         <div class="nav">
-            <a href="#" class="buttn" id="home">Home</a>
-            <a href="#" class="buttn" id="about">About</a>
-            <a href="#" class="buttn" id="contact">Contact</a>
+            <a href="#main-section" class="buttn" id="home">Home</a>
+            <a href="#about-section" class="buttn" id="about">About</a>
+            <a href="#footer-contact" class="buttn" id="contact">Contact</a>
             @if (Route::has('login'))
                 @auth
                     @can('isAdmin')
@@ -40,7 +40,7 @@
     </div>
 
     <!-- Main Section -->
-    <section class="main-section text-center py-5">
+    <section id="main-section" class="main-section text-center py-5">
         <h1 class="display-4">AdaAdu</h1>
         <p class="slogan">Semua Terbantu!</p>
         <p class="intro">Layanan Pengaduan Civitas Akademika UNS</p>
@@ -62,52 +62,19 @@
     </section>
 
     <!-- About Section -->
-    <section class="about-section py-5 bg-light">
-        <div class="bg-main-content">
-            <h2 class="title-what-is-adaadu">Apa itu AdaAdu?</h2>
-            <br>
-            <p class="adaadu-desc"><br>AdaAdu merupakan platform pengaduan masalah berbasis website untuk
-                civitas akademika UNS. Seluruh
-                civitas akademika UNS dapat membuat, melihat, dan mengawal laporan mengenai berbagai
-                permasalahan di lingkungan kampus dari tingkat pusat hingga fakultas.</p>
-            <div class="row">
-                <div class="col-md-5 d-flex text-center flex-wrap">
-                    <div class="col-6 p-2">
-                        <div class="card">
-                            <div class="card-body">
-                                <p class="card-text">Pengintimidasian</p>
-                                <img src="{{ asset('images/intimidasi.jpg') }}" class="card-img-top" alt="Pengintimidasian">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-6 p-2">
-                        <div class="card">
-                            <div class="card-body">
-                                <p class="card-text">Kerusakan Fasilitas</p>
-                                <img src="{{ asset('images/fasilitas.jpg') }}" class="card-img-top" alt="Kerusakan Fasilitas">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-6 p-2">
-                        <div class="card">
-                            <div class="card-body">
-                                <p class="card-text">Kekerasan Seksual</p>
-                                <img src="{{ asset('images/ks.jpg') }}" class="card-img-top" alt="Kekerasan Seksual">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-6 p-2">
-                        <div class="card">
-                            <div class="card-body">
-                                <p class="card-text">Pembullyan</p>
-                                <img src="{{ asset('images/bully.jpg') }}" class="card-img-top" alt="Pembullying">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <div id="about-section" class="bg-main-content">
+        <h2 class="title-what-is-adaadu">Apa itu <br> AdaAdu?</h2>
+        <p class="adaadu-desc">AdaAdu merupakan platform pengaduan masalah berbasis website untuk
+            civitas akademika UNS. Seluruh
+            civitas akademika UNS dapat membuat, melihat, dan mengawal laporan mengenai berbagai
+            permasalahan di lingkungan kampus dari tingkat pusat hingga fakultas.</p>
+        <div class="list-adaadu">
+            <img src="{{ asset('images/Intimidasi-card.png') }}" alt="intimidasi">
+            <img src="{{ asset('images/bullying-card.png') }}" alt="bullying">
+            <img src="{{ asset('images/kekerasan-seksual-card.png') }}" alt="kekerasan-seksual">
+            <img src="{{ asset('images/fasilitas-card.png') }}" alt="kerusakan-fasilitas">
         </div>
-    </section>
+    </div>
 
     <!-- Testimonials Section -->
     <section class="testimonials-section py-5">
@@ -167,7 +134,7 @@
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
+    <footer id="footer-contact" class="footer">
         <div class="section">
             <img src="{{ asset('images/logo-adaadu-svg.svg') }}" alt="AdaAdu">
             <img src="{{ asset('images/logo-uns-svg.svg') }}" alt="Another Logo">

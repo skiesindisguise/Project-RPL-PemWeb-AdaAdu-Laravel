@@ -91,15 +91,42 @@ body {
 }
 
 .bg-main-content {
-    display: flex;
-    width: 1380px;
-    height: 681px;
+    width: 100%;
+    max-width: 1485px;
+    height: 700px;
     border-radius: 15px;
     background: linear-gradient(0deg, #F5F5ED 0%, #C3DFFF 100%);
     box-shadow: 6px 6px 24px 1px rgba(0, 0, 0, 15%);
-    max-width: fit-content;
     margin-left: auto;
     margin-right: auto;
+}
+
+.title-what-is-adaadu {
+    font-size: 45px;
+    color: #222222;
+    font-weight: bold;
+    line-height: 70px;
+    margin-left: 87px;
+    padding-top: 35px;
+}
+
+.adaadu-desc {
+    font-size: 29px;
+    color: rgba(34, 34, 34, 0.7);
+    text-align: justify;
+    margin-top: 30px;
+    margin-left: 150px;
+    padding-right: 800px;
+}
+
+.list-adaadu {
+    display: flex;
+    margin-left: 850px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin-top: -570px;
+    align-items: center;
 }
 
 .main-section {
@@ -127,30 +154,6 @@ body {
     font-weight: bold;
 }
 
-
-.row .card {
-    height: 296px;
-    width: 258px;
-    outline: 2px solid rgba(34, 34, 34, 10%);
-    border-radius: 10px;
-    margin-top: 10px;
-    /* margin-right: 600px; */
-}
-
-.row .card-body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.row .card img {
-    height: 209px;
-    width: 173px;
-    margin-top: 10px;
-    object-fit: cover;
-}
-
 .intro-adaadu {
     font-size: 29px;
     color: #222222;
@@ -160,28 +163,10 @@ body {
     margin-bottom: 40px;
 }
 
-.title-what-is-adaadu {
-    font-size: 45px;
-    color: #222222;
-    font-weight: bold;
-    line-height: 70px;
-    margin-left: 87px;
-    margin-top: 35px;
-}
-
-.adaadu-desc {
-    font-size: 29px;
-    margin-left: -210px;
-    margin-top: 180px;
-    margin-right: 420px;
-    color: rgba(34, 34, 34, 0.7);
-    text-align: justify;
-}
-
 .testimonials-section .card {
     margin-top: 40px;
     box-shadow: 8px 8px 20px 0px rgba(0, 0, 0, 7%);
-    border: 1px #E5E5E5;
+    border: 1px solid #E5E5E5;
     width: 353px;
     height: 260px;
 }
@@ -202,13 +187,15 @@ body {
 }
 
 .testimonials-section .card-body .d-flex {
-    margin-top: 15px;
+    margin-top: 30px;
 }
 
 .card-body .card-text {
     font-weight: lighter;
     color: rgba(34, 34, 34, 0.7);
     text-align: justify;
+    line-height: 35px;
+    margin-top: 5px;
 }
 
 .container h2 {
@@ -274,13 +261,149 @@ body {
     transition: all 300ms ease;
 }
 
-
 .footer .social-icons {
     margin-top: -40px;
     margin-right: 70px;
 }
 
+/* Media Queries for Responsive Design */
+@media screen and (max-width: 1200px) {
+    .header .nav {
+        margin-right: 40px;
+    }
 
+    .buttn {
+        margin-left: 50px;
+    }
 
+    .bg-main-content {
+        padding: 20px;
+    }
 
+    .adaadu-desc {
+        padding-right: 600px;
+    }
 
+    .list-adaadu {
+        margin-left: 700px;
+    }
+
+    .footer .contact {
+        margin-left: 160px;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .header .nav {
+        font-size: 20px;
+        margin-right: 20px;
+    }
+
+    .logo-row {
+        margin-left: 40px;
+    }
+
+    .buttn {
+        margin-left: 20px;
+    }
+
+    .bg-main-content {
+        height: auto;
+    }
+
+    .adaadu-desc {
+        padding-right: 400px;
+    }
+
+    .list-adaadu {
+        margin-left: 500px;
+    }
+
+    .footer .contact {
+        margin-left: 80px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .header {
+        flex-direction: column;
+    }
+
+    .header .nav {
+        flex-direction: column;
+        margin-right: 0;
+    }
+
+    .buttn {
+        margin-left: 0;
+        margin-top: 10px;
+    }
+
+    .bg-main-content {
+        height: auto;
+    }
+
+    .list-adaadu {
+
+    }
+
+    .adaadu-desc {
+        padding-right: 0;
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+
+    .list-adaadu {
+        margin-left: 0;
+        justify-content: center;
+    }
+
+    .footer {
+        flex-direction: column;
+    }
+
+    .footer .contact {
+        margin-left: 0;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .header .nav {
+        font-size: 18px;
+    }
+
+    .logo-row {
+        margin-left: 20px;
+    }
+
+    .buttn {
+        font-size: 18px;
+    }
+
+    .main-section h1 {
+        font-size: 60px;
+    }
+
+    .main-section .intro {
+        font-size: 24px;
+    }
+
+    .main-section .intro-adaadu {
+        font-size: 18px;
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+
+    .list-adaadu {
+        display: none;
+    }
+
+    .adaadu-desc {
+        font-size: 18px;
+    }
+
+    .footer .social-icons img {
+        width: 25px;
+        height: 25px;
+    }
+}
