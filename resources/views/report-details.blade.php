@@ -7,38 +7,42 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <link href='https://unpkg.com/css.gg@2.0.0/icons/css/software-download.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="reportdetails-umum.css">
+    <link rel="stylesheet" href="{{ asset('style/report-details.css') }}">
     <script src="https://kit.fontawesome.com/22694d56fe.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <div class="header">
         <div class="logo-row">
             <div class="logo-column">
-                <img src="../assets/logo-adaadu-svg.svg" alt="adaadu">
+                <img src="{{ asset('images/logo-adaadu-svg.svg') }}" alt="adaadu">
             </div>
             <div class="logo-column">
-                <img src="../assets/logo-uns-svg.svg" alt="logouns">
+                <img src="{{ asset('images/logo-uns-svg.svg') }}" alt="logouns">
             </div>
         </div>
         <div class="nav">
-            <a href="../faqih/view-report-umum.html" class="buttn">View Report</a>
-            <a href="../fajar/dashboardamin.html" class="buttn">Dashboard</a>
+            <a href="#" class="buttn">View Report</a>
+            <a href="#" class="buttn">Dashboard</a>
         </div>
     </div>
     <div class="container">
-        <div class="report-title" id="report-title"></div>
+        <div class="report-title" id="report-title">{{ $report->title }}</div>
         <div class="vote-download">
             <div class="vote-count" id="vote-count"></div>
             <button class="btn"><i class="fa-solid fa-circle-up fa-2xl" style="color: #1491ec;"></i></button>
         </div>
         <div class="report-attr">
-            <div id="report-tag">Fasilitas</div>
-            <div id="report-author"></div>
-            <div id="report-date"></div>
+            <div id="report-tag">{{ $report-> tag }}</div>
+            <div id="report-author">{{ $report-> author }}</div>
+            <div id="report-date">{{ \Carbon\Carbon::parse($report->report_date)->format('d M Y') }}</div>
         </div>
-        <button class="status" id="report-status" data-toggle="modal" data-target="#statusModal"></button>
-        <div class="report-desc" id="report-desc"></div>
-        <img id="report-image" class="report-image" src="../assets/reportimageex.jpg" alt="Report Image">
+        <div class="status {{ $report->status == 'Sedang Ditindaklanjuti' ? 'status-in-progress' : 'status-completed' }}" id="report-status" data-toggle="modal" data-target="#statusModal">{{ $report->status }}<br>{{ now()->format('d M Y') }}</div>
+        <div class="report-desc" id="report-desc">{{ $report-> description }}</div>
+        @if ($report->photo)
+            <img id="report-image" class="report-image" src="{{ $report->photo }}" alt="Report Image">
+        @else
+            <img id="report-image" class="report-image" src="{{ asset('images/default-report-image.jpg') }}" alt="Report Image">
+        @endif
         
     </div>
 

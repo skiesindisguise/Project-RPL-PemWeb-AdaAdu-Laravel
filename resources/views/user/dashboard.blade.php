@@ -24,19 +24,19 @@
         <div class="nav">
             <a href="#" class="buttn" id="viewReportButton">View Report</a>
             <a href="#" class="buttn" id="dashboardButton">Dashboard</a>
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <a :href="route('logout')" class="buttnlogout"
+                        onclick="event.preventDefault();
+                                    this.closest('form').submit();">
+                    {{ __('Log Out') }}
+                </a>
+            </form>
         </div>
     </div>
     <div class="container">
-        <div class="title">Halo, Khansa Amani</div>
+        <div class="title">Halo, {{ Auth::user()->name }}</div>
         <div class="sub-title">Berikut merupakan riwayat laporanmu</div>
-        <form method="POST" action="{{ route('logout') }}">
-            @csrf
-            <a :href="route('logout')"
-                    onclick="event.preventDefault();
-                                this.closest('form').submit();">
-                {{ __('Log Out') }}
-            </a>
-        </form>
         <div class="search-filter-bar">
             <div class="search-bar">
                 <input type="text" id="search-input" placeholder="Search here">
@@ -48,72 +48,36 @@
                 </select>
             </div>
         </div>
-        <div class="report-card" data-date="2023-05-04" data-votes="10" onclick="viewReportDetails(this)">
-            <div class="meta">
-                <div>
-                    <div class="report-title">AC Gedung B Ruang B406 FATISDA Kurang Dingin</div>
-                    <div class="report-attr">
-                        <div class="report-tag">Fasilitas</div>
-                        <div class="report-author">Khansa Amani</div>
-                        <div class="report-date">04 Mei 2023</div>
+        @forelse (auth()->user()->reports as $report)
+            <div class="report-card" data-date="{{ $report->report_date }}" data-votes="{{ $report->votes }}">
+                <a href="{{ route('reports.show', $report->id) }}" style="text-decoration: none; color: inherit;">
+                    <div class="report-grid">
+                        <div class="grid-title">{{ $report->title }}</div>
+                        <div class="grid-vote">
+                            <div class="vote-count">{{ $report->votes }}<br>vote</div>
+                            <button class="btn-trash"><i class="fa-solid fa-trash fa-2xl" style="color: #444444;"></i></button>
+                        </div>
+                        <div class="grid-attr">
+                            <div class="report-tag">{{ $report->tag }}</div>
+                            <div class="report-author">{{ $report->author }}</div>
+                            <div class="report-date">{{ \Carbon\Carbon::parse($report->report_date)->format('d M Y') }}</div>
+                        </div>
+                        <div class="grid-status-wrapper">
+                            <div class="grid-status {{ $report->status == 'Sedang Ditindaklanjuti' ? 'status-in-progress' : 'status-completed' }}">
+                            {{ $report->status }}<br>{{ now()->format('d M Y') }}
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="vote">
-                    <div class="button">
-                        <div class="vote-count">10<br>vote</div>
-                        <button class="btn-trash"><i class="fa-solid fa-trash fa-2xl" style="color: #444444;"></i></button>
+                    <div class="report-desc">
+                        <p>{{ \Illuminate\Support\Str::limit($report->description, 500) }}</p>
                     </div>
-                    <div class="status status-in-progress">Sedang Ditindaklanjuti | 6 Juni 2024</div>
-                </div>
+                </a>
             </div>
-            <div class="report-desc">
-                <p>Sejak beberapa waktu terakhir, AC di ruangan ini tidak berfungsi dengan baik sehingga suhu ruangan menjadi kurang dingin dan tidak nyaman untuk kegiatan belajar mengajar maupun aktivitas lainnya. Hal ini sangat mengganggu kenyamanan dan produktivitas kami. Mohon kiranya pihak pemeliharaan dapat segera menindaklanjuti dan memperbaiki masalah ini agar kegiatan dapat berjalan dengan lancar.</p>
+        @empty
+            <div class="alert alert-danger">
+                Anda belum pernah membuat laporan.
             </div>
-        </div>
-        <div class="report-card" data-date="2024-02-03" data-votes="100" onclick="viewReportDetails(this)">
-            <div class="meta">
-                <div>
-                    <div class="report-title">AC Gedung B Ruang B406 FATISDA Kurang Dingin</div>
-                    <div class="report-attr">
-                        <div class="report-tag">Fasilitas</div>
-                        <div class="report-author">Khansa Amani</div>
-                        <div class="report-date">03 Februari 2024</div>
-                    </div>
-                </div>
-                <div class="vote">
-                    <div class="button">
-                        <div class="vote-count">100<br>vote</div>
-                        <button class="btn-trash"><i class="fa-solid fa-trash fa-2xl" style="color: #444444;"></i></button>
-                    </div>
-                    <div class="status status-completed">Selesai | 5 Juni 2024</div>
-                </div>
-            </div>
-            <div class="report-desc">
-                <p>Sejak beberapa waktu terakhir, AC di ruangan ini tidak berfungsi dengan baik sehingga suhu ruangan menjadi kurang dingin dan tidak nyaman untuk kegiatan belajar mengajar maupun aktivitas lainnya. Hal ini sangat mengganggu kenyamanan dan produktivitas kami. Mohon kiranya pihak pemeliharaan dapat segera menindaklanjuti dan memperbaiki masalah ini agar kegiatan dapat berjalan dengan lancar.</p>
-            </div>
-        </div>
-        <div class="report-card" data-date="2025-01-01" data-votes="3" onclick="viewReportDetails(this)">
-            <div class="meta">
-                <div>
-                    <div class="report-title">AC Gedung B Ruang B406 FATISDA Kurang Dingin</div>
-                    <div class="report-attr">
-                        <div class="report-tag">Fasilitas</div>
-                        <div class="report-author">Khansa Amani</div>
-                        <div class="report-date">01 Januari 2025</div>
-                    </div>
-                </div>
-                <div class="vote">
-                    <div class="button">
-                        <div class="vote-count">3<br>vote</div>
-                        <button class="btn-trash"><i class="fa-solid fa-trash fa-2xl" style="color: #444444;"></i></button>
-                    </div>
-                    <div class="status status-completed">Selesai | 5 Juni 2024</div>
-                </div>
-            </div>
-            <div class="report-desc">
-                <p>Sejak b eberapa waktu terakhir, AC di ruangan ini tidak berfungsi dengan baik sehingga suhu ruangan menjadi kurang dingin dan tidak nyaman untuk kegiatan belajar mengajar maupun aktivitas lainnya. Hal ini sangat mengganggu kenyamanan dan produktivitas kami. Mohon kiranya pihak pemeliharaan dapat segera menindaklanjuti dan memperbaiki masalah ini agar kegiatan dapat berjalan dengan lancar.</p>
-            </div>
-        </div>
+        @endforelse
         <button class="floating-add-button" id="createReportButton"><i class="fa-solid fa-circle-plus fa-2xl" style="color: #1491ec;"></i></button>
     </div>
     <!-- Modal -->

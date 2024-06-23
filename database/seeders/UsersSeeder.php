@@ -7,8 +7,9 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use App\Models\User;
 
-class UsersTableSeeder extends Seeder
+class UsersSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -29,5 +30,6 @@ class UsersTableSeeder extends Seeder
                 'password' => Hash::make('12345678'), // Password hashing
             ],
         ]);
+        User::factory()->count(5)->create();
     }
 }

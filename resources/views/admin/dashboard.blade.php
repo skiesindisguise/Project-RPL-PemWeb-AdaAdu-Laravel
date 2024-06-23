@@ -69,7 +69,7 @@
                         </div>
                     </div>
                     <div class="report-desc">
-                        <p>{{ $report->description }}</p>
+                        <p>{{ \Illuminate\Support\Str::limit($report->description, 500) }}</p>
                     </div>
                 </a>
             </div>

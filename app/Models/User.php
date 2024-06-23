@@ -44,4 +44,13 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function reports() {
+        if ($this->role === 'user') {
+            return $this->hasMany(Report::class);
+        }
+        else {
+            return collect();
+        }
+    }
 }

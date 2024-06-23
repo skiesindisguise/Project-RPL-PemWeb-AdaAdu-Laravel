@@ -84,25 +84,30 @@ body {
     display: inline-block;
     padding: 5px 10px;
     border-radius: 25px;
+    color: #444444;
     border: none;
-    color: #fff;
     margin-top: 10px;
     position: absolute;
     right: 35px;
-    top: 75px; /* Align with author and date */
+    top: 75px;
+    width: 210px;
+    height: max-content;
+    text-align: center;
 }
 .status:hover {
-    box-shadow: 5px 5px 15px 0px rgba(25, 25, 25, 30%);
-    transition: 0.4s;
+    cursor: pointer;
+    transform: scale(1.01);
+    opacity: 0.8;
 }
 .status-in-progress {
-    background-color: #f0ad4e;
+    background-color: #FFE5A0;
 }
 .status-completed {
-    background-color: #5cb85c;
+    background-color: #C4FFC3;
 }
 .report-desc {
     margin-top:20px;
+    padding-top: 20px;
     margin-bottom: 20px;
     margin-right: 30px;
     text-align: justify;
