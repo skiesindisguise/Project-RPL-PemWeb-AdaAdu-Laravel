@@ -78,7 +78,9 @@
                 Anda belum pernah membuat laporan.
             </div>
         @endforelse
-        <button class="floating-add-button" id="createReportButton"><i class="fa-solid fa-circle-plus fa-2xl" style="color: #1491ec;"></i></button>
+        <button class="floating-add-button" id="createReportButton">
+            <i class="fa-solid fa-circle-plus fa-2xl" style="color: #1491ec;"></i>
+        </button>
     </div>
     <!-- Modal -->
     <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
@@ -104,6 +106,10 @@
       <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>  
-      <script src="dashboard-user.js"></script>
+      <script>
+        document.getElementById('createReportButton').addEventListener('click', function() {
+            window.location.href = "{{ route('reports.create-report') }}";
+        });
+    </script>
 </body>
 </html>
