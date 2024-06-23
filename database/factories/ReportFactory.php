@@ -1,4 +1,5 @@
 <?php
+
 namespace Database\Factories;
 
 use App\Models\Report;
@@ -14,19 +15,18 @@ class ReportFactory extends Factory
         $isAnonymous = $this->faker->boolean(30);
         
         return [
-            'user_id' => User::factory(), // Ensure user_id is generated
+            #'user_id' => User::factory(),
             'title' => $this->faker->sentence,
             'anonymous' => $isAnonymous,
             'public'    => $this->faker->boolean(50),
             'description' => implode("\n\n", $this->faker->paragraphs(20)),
-            'author' => $isAnonymous ? 'Anonymous' : $this->faker->name,
-            'report_date' => $this->faker->dateTimeBetween('-4 years', 'now')->format('Y-m-d'),
+            #'author' => $isAnonymous ? 'Anonim' : $this->faker->name,
+            'report_date' => $this->faker->dateTimeBetween('-4 years', 'now'),
             'votes' => $this->faker->numberBetween(0, 100),
             'status' => $this->faker->randomElement(['Sedang Ditindaklanjuti', 'Selesai']),
-            'tag' => $this->faker->randomElement(['Fasilitas', 'Pengaduan', 'Pelanggaran', 'Kekerasan seksual']),
-            'photo' => $this->faker->imageUrl(640, 480, 'animals', true),
+            'tag' => $this->faker->randomElement(['Fasilitas', 'Pengaduan', 'Pelanggaran', 'kekerasan seksual']), // Sesuaikan dengan kebutuhan dan data tersedia'Fasilitas', // Sesuaikan dengan kebutuhan
+            'photo' => $this->faker->imageUrl(640, 480, 'animals', true), // Menggunakan URL gambar dari Faker
             'status_desc' => $this->faker->sentence
         ];
     }
 }
-

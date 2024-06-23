@@ -3,10 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Report;
+use App\Models\User;
+
 use Illuminate\View\View;
+
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\Storage;
+
 use Illuminate\Support\Facades\Auth;
 
 class ReportController extends Controller
@@ -34,19 +39,18 @@ class ReportController extends Controller
 
         $anonymous = $request->anonymous;
 
-        $report = Report::create([
-            'user_id'       => $user->id,
+        $report = $user->reports->create([
             'title'         => $request->title,
-            'tag'           => $request->tag,
+            'tag'           => $request->platform,
             'anonymous'     => $request->anonymous,
             'public'        => $request->public,
             'author'        => $anonymous ? 'Anonymous' : $user->name,
             'description'   => $request->description,
-            'report_date'   => now()->format('Y-m-d'),
+            'report_date'   => now()->format('d M Y'),
             'photo'         => $photo->hashName(),
         ]);
 
-        return redirect()->route('user.dashboard');
+        return redirect()->route('reports.index');
     }
 
     public function show(string $id): View
@@ -66,6 +70,6 @@ class ReportController extends Controller
 
         $report->delete();
 
-        return redirect()->route('user.dashboard');
+        return redirect()->route('reports.index');
     }
 }
