@@ -78,9 +78,9 @@
                 Anda belum pernah membuat laporan.
             </div>
         @endforelse
-        <button class="floating-add-button" id="createReportButton">
+        <a class="floating-add-button" id="createReportButton" href="{{ route('reports.create') }}">
             <i class="fa-solid fa-circle-plus fa-2xl" style="color: #1491ec;"></i>
-        </button>
+        </a>
     </div>
     <!-- Modal -->
     <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
@@ -108,7 +108,7 @@
       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>  
       <script>
         document.getElementById('createReportButton').addEventListener('click', function() {
-            window.location.href = "{{ route('reports.create-report') }}";
+            window.location.href = "{{ route('reports.create') }}";
         });
     </script>
 </body>

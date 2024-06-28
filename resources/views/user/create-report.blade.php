@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Buat Laporan</title>
-    <link rel="stylesheet" href="{{ asset('style/reports/create-report.css') }}">
+    <link rel="stylesheet" href="{{ asset('style/user/create-report.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    <script src="{{ asset('js/reports/create-report.js') }}"></script>
 </head>
 <body>
     <div class="navbar">

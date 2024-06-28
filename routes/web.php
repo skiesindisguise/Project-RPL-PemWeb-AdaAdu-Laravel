@@ -15,10 +15,6 @@ Route::get('/user/dashboard', [UserDashboardController::class, 'index'])->middle
 
 Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->middleware(['auth', 'admin', 'can:isAdmin', 'verified'])->name('admin.dashboard');
 
-Route::get('/reports/create-report', [ReportController::class, 'create'])->name('reports.create-report');
-
-Route::post('/reports', [ReportController::class, 'store'])->name('reports.store');
-
 Route::get('/admin/reportdetails/{id}', [AdminDashboardController::class, 'show'])->middleware(['auth', 'admin', 'can:isAdmin', 'verified'])->name('report.details');
 
 Route::resource('/reports', ReportController::class);

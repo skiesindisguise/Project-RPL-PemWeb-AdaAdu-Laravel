@@ -12,13 +12,11 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Storage;
 
-use Illuminate\Support\Facades\Auth;
-
 class ReportController extends Controller
 {
     public function create(): View
     {
-        return view('reports.create-report');
+        return view('user.create-report');
     }
 
     public function store(Request $request): RedirectResponse
@@ -39,18 +37,18 @@ class ReportController extends Controller
 
         $anonymous = $request->anonymous;
 
-        $report = $user->reports->create([
+        $report = $user->reports()->create([
             'title'         => $request->title,
-            'tag'           => $request->platform,
+            'tag'           => $request->tag,
             'anonymous'     => $request->anonymous,
             'public'        => $request->public,
             'author'        => $anonymous ? 'Anonymous' : $user->name,
             'description'   => $request->description,
-            'report_date'   => now()->format('d M Y'),
+            'report_date'   => now()->toDateString(),
             'photo'         => $photo->hashName(),
         ]);
 
-        return redirect()->route('reports.index');
+        return redirect()->route('user.dashboard');
     }
 
     public function show(string $id): View
