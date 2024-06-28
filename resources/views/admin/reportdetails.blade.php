@@ -57,7 +57,7 @@
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
+     <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
@@ -67,23 +67,24 @@
               </button>
             </div>
             <div class="modal-body">
-              <form>
+              <form id="updateForm">
+                @csrf
                 <div class="form-group">
                   <label for="status-select">Status</label>
-                  <select class="form-control" id="status-select">
-                    <option class="modal-a" value="sedang ditindaklanjuti">Sedang Ditindaklanjuti</option>
-                    <option class="modal-b" value="selesai">Selesai</option>
+                  <select class="form-control" id="status-select" name="status">
+                    <option value="Sedang Ditindaklanjuti">Sedang Ditindaklanjuti</option>
+                    <option value="Selesai">Selesai</option>
                   </select>
                 </div>
                 <div class="form-group">
                   <label for="update-description">Update Description</label>
-                  <textarea class="form-control" id="update-description" rows="3"></textarea>
+                  <textarea class="form-control" id="update-description" name="status_desc" rows="3"></textarea>
                 </div>
               </form>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-              <button type="button" class="btn btn-primary">Update</button>
+              <button type="button" class="btn btn-primary" id="updateButton">Update</button>
             </div>
           </div>
         </div>
@@ -100,13 +101,39 @@
             <div class="modal-body">
                 <div class="report-title" id="modal-report-title"></div>
                 <div class="modal-status" id="modal-report-status"></div>
-                <div class="modal-status-desc">{{ $report->status_desc }}</div>
+                <div class="modal-status-report {{ $report->status == 'Sedang Ditindaklanjuti' ? 'status-in-progress' : 'status-completed' }}" id="report-status" data-toggle="modal" data-target="#statusModal">{{ $report->status }}</div>
+                <div class="modal-status-desc"><p>Informasi:<br>{{ $report->status_desc }}</p></div>
             </div>
           </div>
         </div>
     </div>
-      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>  
-</body>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+      $(document).ready(function() {
+        $('#updateButton').on('click', function() {
+          var formData = {
+            _token: $('input[name=_token]').val(),
+            status: $('#status-select').val(),
+            status_desc: $('#update-description').val()
+          };
+          
+          $.ajax({
+            url: '{{ route("report.update", ["id" => $report->id]) }}',
+            method: 'POST',
+            data: formData,
+            success: function(response) {
+              $('#updateModal').modal('hide');
+              alert(response.success);
+              location.reload();
+            },
+            error: function(response) {
+              alert('An error occurred while updating the report');
+            }
+          });
+        });
+      });
+    </script>
+  </body>
 </html>

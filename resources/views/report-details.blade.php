@@ -32,12 +32,15 @@
             <button class="btn"><i class="fa-solid fa-circle-up fa-2xl" style="color: #1491ec;"></i></button>
         </div>
         <div class="report-attr">
-            <div id="report-tag">{{ $report-> tag }}</div>
-            <div id="report-author">{{ $report-> author }}</div>
+            <div id="report-tag">{{ $report->tag }}</div>
+            <div id="report-author">{{ $report->author }}</div>
             <div id="report-date">{{ \Carbon\Carbon::parse($report->report_date)->format('d M Y') }}</div>
         </div>
-        <div class="status {{ $report->status == 'Sedang Ditindaklanjuti' ? 'status-in-progress' : 'status-completed' }}" id="report-status" data-toggle="modal" data-target="#statusModal">{{ $report->status }}<br>{{ now()->format('d M Y') }}</div>
-        <div class="report-desc" id="report-desc">{{ $report-> description }}</div>
+        <!-- Update here to include the status description in the modal -->
+        <div class="status {{ $report->status == 'Sedang Ditindaklanjuti' ? 'status-in-progress' : 'status-completed' }}" id="report-status" data-toggle="modal" data-target="#statusModal" data-status="{{ $report->status }}" data-status-desc="{{ $report->status_desc }}">
+            {{ $report->status }}<br>{{ now()->format('d M Y') }}
+        </div>
+        <div class="report-desc" id="report-desc">{{ $report->description }}</div>
         @if ($report->photo)
             @php
                 $photo_path = '/reports/user_' . $report->user->id . '/' . $report->photo;
@@ -50,7 +53,6 @@
         @else
             <img id="report-image" class="report-image" src="{{ asset('images/default-report-image.jpg') }}" alt="Report Image">
         @endif
-        
     </div>
 
     <!-- Modal -->
@@ -66,14 +68,28 @@
             <div class="modal-body">
                 <div class="report-title" id="modal-report-title"></div>
                 <div class="modal-status" id="modal-report-status"></div>
-                <div class="modal-status-desc">Nanti penjelasan progress di sini</div>
+                <div class="modal-status-report {{ $report->status == 'Sedang Ditindaklanjuti' ? 'status-in-progress' : 'status-completed' }}" id="report-status" data-toggle="modal" data-target="#statusModal">{{ $report->status }}</div>
+                <div class="modal-status-desc"><p>Informasi:<br>{{ $report->status_desc }}</p></div>
             </div>
           </div>
         </div>
     </div>
-      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>  
-      <script src="reportdetails-umum.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>  
+    <script src="reportdetails-umum.js"></script>
+    <script>
+        // Script to update status modal content dynamically
+        $('#statusModal').on('show.bs.modal', function (event) {
+            var statusModal = $(this);
+            var status = $(event.relatedTarget).data('status');
+            var statusDesc = $(event.relatedTarget).data('status-desc');
+
+            // statusModal.find('.modal-title').text('Report Status: ' + status);
+            // statusModal.find('#modal-report-status').text(status);
+            // statusModal.find('#modal-report-status-desc').text(statusDesc);
+        });
+    </script>
 </body>
 </html>

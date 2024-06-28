@@ -115,6 +115,10 @@ body {
 .status-completed {
     background-color: #C4FFC3;
 }
+.status-belum-ditindaklanjuti {
+    background-color: #f78480;
+}
+
 .report-desc {
     margin-top:20px;
     margin-bottom: 20px;
@@ -197,4 +201,24 @@ body {
 }
 .modal-b{
     background-color: #C4FFC3;
+}
+.modal-c{
+    background-color: #f78480;
+}
+
+.modal-status-report {
+    border-radius: 5px;
+    color: #444444;
+    border: none;
+    right: 35px;
+    top: 75px;
+    width: 210px;
+    margin-bottom: 10px;
+    height: max-content;
+    text-align: center;
+}
+
+.modal-status-desc {
+    margin-right: 30px;
+    text-align: justify;
 }

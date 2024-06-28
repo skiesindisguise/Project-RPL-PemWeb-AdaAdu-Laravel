@@ -17,6 +17,8 @@ Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->midd
 
 Route::get('/admin/reportdetails/{id}', [AdminDashboardController::class, 'show'])->middleware(['auth', 'admin', 'can:isAdmin', 'verified'])->name('report.details');
 
+Route::post('/admin/reportdetails/update/{id}', [AdminDashboardController::class, 'update'])->middleware(['auth', 'admin', 'can:isAdmin', 'verified'])->name('report.update');
+
 Route::resource('/reports', ReportController::class);
 
 Route::middleware('auth')->group(function () {
