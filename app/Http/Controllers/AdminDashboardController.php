@@ -53,4 +53,11 @@ class AdminDashboardController extends Controller
 
         return response()->json(['success' => 'Report updated successfully']);
     }
+
+    public function showUmum($id)
+    {
+        $report = Report::findOrFail($id);
+        return view('reportdetails-umum', compact('report'));
+    }
+
 }

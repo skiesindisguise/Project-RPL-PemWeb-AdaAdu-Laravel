@@ -24,7 +24,7 @@
             </div>
         </div>
         <div class="nav">
-            <a href="#" class="buttn" id="viewReportButton">View Report</a>
+            <a href="{{ route('admin.viewreport') }}" class="buttn" id="viewReportButton">View Report</a>
             <a href="{{ route('admin.dashboard') }}" class="buttn" id="dashboardButton">Dashboard</a>
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
