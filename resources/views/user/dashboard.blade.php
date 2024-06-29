@@ -23,7 +23,7 @@
         </div>
         <div class="nav">
             <a href="#" class="buttn" id="viewReportButton">View Report</a>
-            <a href="#" class="buttn" id="dashboardButton">Dashboard</a>
+            <a href="{{ route('user.dashboard') }}" class="buttn" id="dashboardButton">Dashboard</a>
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
                 <a :href="route('logout')" class="buttnlogout"

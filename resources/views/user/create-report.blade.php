@@ -15,7 +15,7 @@
         </div>
         <div class="nav-links">
             <a href="#">View Report</a>
-            <a href="#" class="dashboard">Dashboard</a>
+            <a href="{{ route('user.dashboard') }}" class="dashboard">Dashboard</a>
         </div>
     </div>
     <h2>Buat Laporan</h2>
