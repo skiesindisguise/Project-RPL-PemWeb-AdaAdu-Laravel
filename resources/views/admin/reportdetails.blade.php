@@ -46,7 +46,14 @@
         <div class="status {{ $report->status == 'Sedang Ditindaklanjuti' ? 'status-in-progress' : 'status-completed' }}" id="report-status" data-toggle="modal" data-target="#statusModal">{{ $report->status }}<br>{{ now()->format('d M Y') }}</div>
         <div class="report-desc" id="report-desc">{{ $report->description }}</div>
         @if ($report->photo)
-            <img id="report-image" class="report-image" src="{{ $report->photo }}" alt="Report Image">
+            @php
+                $photo_path = '/reports/user_' . $report->user->id . '/' . $report->photo;
+            @endphp
+            @if (Storage::exists('public/' . $photo_path))
+                <img id="report-image" class="report-image" src="{{ asset('storage/' . $photo_path) }}" alt="Report Image">
+            @elseif (filter_var($report->photo, FILTER_VALIDATE_URL))
+                <img id="report-image" class="report-image" src="{{ $report->photo }}" alt="Report Image">
+            @endif
         @else
             <img id="report-image" class="report-image" src="{{ asset('images/default-report-image.jpg') }}" alt="Report Image">
         @endif

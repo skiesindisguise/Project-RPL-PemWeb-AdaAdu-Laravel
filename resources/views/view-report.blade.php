@@ -5,105 +5,75 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Fasilitas</title>
     <link href='https://unpkg.com/css.gg@2.0.0/icons/css/software-download.css' rel='stylesheet'>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="view-report.css">
+    <link rel="stylesheet" href="{{ asset('style/admin/dashboard.css') }}">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="view-report.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
+    <script src="{{ asset('js/admin/dashboard.js') }}"></script>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body>
     <div class="header">
         <div class="logo-row">
             <div class="logo-column">
-                <img src="../assets/logo-adaadu-svg.svg" alt="adaadu">
+                <img src="{{ asset('images/logo-adaadu-svg.svg') }}" alt="adaadu">
             </div>
             <div class="logo-column">
-                <img src="../assets/logo-uns-svg.svg" alt="logouns">
+                <img src="{{ asset('images/logo-uns-svg.svg') }}" alt="logouns">
             </div>
         </div>
         <div class="nav">
             <a href="#" class="buttn" id="viewReportButton">View Report</a>
             <a href="#" class="buttn" id="dashboardButton">Dashboard</a>
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <a :href="route('logout')" class="buttnlogout"
+                        onclick="event.preventDefault();
+                                    this.closest('form').submit();">
+                    {{ __('Log Out') }}
+                </a>
+            </form>
         </div>
     </div>
     <div class="container">
         <div class="search-filter-bar">
-            <div class="search-bar">
-                <input type="text" id="search-input" placeholder="Search here">
-            </div>
-            <div class="filter-bar">
-                <select id="filter-option" onchange="filterReports()">
-                    <option value="newest">by latest</option>
-                    <option value="highest">by most vote</option>
-                </select>
-            </div>
+            <form method="GET" action="{{ route('admin.dashboard') }}" class="search-bar">
+                <input type="text" name="query" id="search-input" placeholder="Search here" value="{{ request('query') }}">
+                <div class="filter-bar">
+                    <select id="filter-option" onchange="filterReports()">
+                        <option value="newest">by latest</option>
+                        <option value="highest">by most vote</option>
+                    </select>
+                </div>
+            </form>
         </div>
-        <div class="report-card" data-date="2023-05-04" data-votes="10" onclick="viewReportDetails(this)">
-            <div class="meta">
-                <div>
-                    <div class="report-title">AC Gedung B Ruang B406 FATISDA Kurang Dingin</div>
-                    <div class="report-attr">
-                        <div class="report-tag">Fasilitas</div>
-                        <div class="report-author">Khansa Amani</div>
-                        <div class="report-date">04 Mei 2023</div>
+        @foreach ($reports as $report)
+            <div class="report-card" data-date="{{ $report->report_date }}" data-votes="{{ $report->votes }}">
+                <a href="{{ route('report.details', ['id' => $report->id]) }}" style="text-decoration: none; color: inherit;">
+                    <div class="report-grid">
+                        <div class="grid-title">{{ $report->title }}</div>
+                        <div class="grid-vote">
+                            <div class="vote-count">{{ $report->votes }}<br>vote</div>
+                            <button class="btn" onclick="event.stopPropagation();"><i class="gg-software-download"></i></button>
+                        </div>
+                        <div class="grid-attr">
+                            <div class="report-tag">{{ $report->tag }}</div>
+                            <div class="report-author">{{ $report->author }}</div>
+                            <div class="report-date">{{ \Carbon\Carbon::parse($report->report_date)->format('d M Y') }}</div>
+                        </div>
+                        <div class="grid-status-wrapper">
+                            <div class="grid-status {{ $report->status == 'Sedang Ditindaklanjuti' ? 'status-in-progress' : 'status-completed' }}">
+                                {{ $report->status }}<br>{{ now()->format('d M Y') }}
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="vote">
-                    <div class="button">
-                        <div class="vote-count">10<br>vote</div>
-                        <button class="btn"><i class="gg-software-download"></i></button>
+                    <div class="report-desc">
+                        <p>{{ \Illuminate\Support\Str::limit($report->description, 500) }}</p>
                     </div>
-                    <div class="status status-in-progress">Sedang Ditindaklanjuti | 6 Juni 2024</div>
-                </div>
+                </a>
             </div>
-            <div class="report-desc">
-                <p>Sejak beberapa waktu terakhir, AC di ruangan ini tidak berfungsi dengan baik sehingga suhu ruangan menjadi kurang dingin dan tidak nyaman untuk kegiatan belajar mengajar maupun aktivitas lainnya. Hal ini sangat mengganggu kenyamanan dan produktivitas kami. Mohon kiranya pihak pemeliharaan dapat segera menindaklanjuti dan memperbaiki masalah ini agar kegiatan dapat berjalan dengan lancar.</p>
-            </div>
-        </div>
-        <div class="report-card" data-date="2024-02-03" data-votes="100" onclick="viewReportDetails(this)">
-            <div class="meta">
-                <div>
-                    <div class="report-title">AC Gedung B Ruang B406 FATISDA Kurang Dingin</div>
-                    <div class="report-attr">
-                        <div class="report-tag">Fasilitas</div>
-                        <div class="report-author">Khansa Amani</div>
-                        <div class="report-date">03 Februari 2024</div>
-                    </div>
-                </div>
-                <div class="vote">
-                    <div class="button">
-                        <div class="vote-count">100<br>vote</div>
-                        <button class="btn"><i class="gg-software-download"></i></button>
-                    </div>
-                    <div class="status status-completed">Selesai | 5 Juni 2024</div>
-                </div>
-            </div>
-            <div class="report-desc">
-                <p>Sejak beberapa waktu terakhir, AC di ruangan ini tidak berfungsi dengan baik sehingga suhu ruangan menjadi kurang dingin dan tidak nyaman untuk kegiatan belajar mengajar maupun aktivitas lainnya. Hal ini sangat mengganggu kenyamanan dan produktivitas kami. Mohon kiranya pihak pemeliharaan dapat segera menindaklanjuti dan memperbaiki masalah ini agar kegiatan dapat berjalan dengan lancar.</p>
-            </div>
-        </div>
-        <div class="report-card" data-date="2025-01-01" data-votes="3" onclick="viewReportDetails(this)">
-            <div class="meta">
-                <div>
-                    <div class="report-title">AC Gedung B Ruang B406 FATISDA Kurang Dingin</div>
-                    <div class="report-attr">
-                        <div class="report-tag">Fasilitas</div>
-                        <div class="report-author">Khansa Amani</div>
-                        <div class="report-date">01 Januari 2025</div>
-                    </div>
-                </div>
-                <div class="vote">
-                    <div class="button">
-                        <div class="vote-count">3<br>vote</div>
-                        <button class="btn"><i class="gg-software-download"></i></button>
-                    </div>
-                    <div class="status status-completed">Selesai | 5 Juni 2024</div>
-                </div>
-            </div>
-            <div class="report-desc">
-                <p>Sejak beberapa waktu terakhir, AC di ruangan ini tidak berfungsi dengan baik sehingga suhu ruangan menjadi kurang dingin dan tidak nyaman untuk kegiatan belajar mengajar maupun aktivitas lainnya. Hal ini sangat mengganggu kenyamanan dan produktivitas kami. Mohon kiranya pihak pemeliharaan dapat segera menindaklanjuti dan memperbaiki masalah ini agar kegiatan dapat berjalan dengan lancar.</p>
-            </div>
-        </div>
+        @endforeach
     </div>
 </body>
 </html>
