@@ -18,6 +18,7 @@ body {
     padding: 10px;
     background-color: #fff;
 }
+
 .logo-row {
     display: flex;
     margin-left: 80px;
@@ -288,11 +289,20 @@ body {
     align-items: center;
     flex-wrap: wrap;
 }
-.footer .section {
-    flex: 1;
-    text-align: center;
-    margin: 10px;
+@keyframes slide-up {
+    0% {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
+.nav {
+    animation: slide-up 1s ease-in;
+}
+
 .footer .section img {
     width: 70px;
     height: 70px;
@@ -336,7 +346,6 @@ body {
     filter: none;
     transform: scale(1.2);
 }
-
 
 .footer .social-icons {
     margin-top: -40px;
