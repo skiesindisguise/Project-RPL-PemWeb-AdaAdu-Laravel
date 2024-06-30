@@ -35,7 +35,7 @@
     <div class="container">
         <div class="report-title" id="report-title">{{ $report->title }}</div>
         <div class="vote-download">
-            <div class="vote-count" id="vote-count">{{ $report->votes }} votes</div>
+            <div class="vote-count" id="vote-count">{{ $report->votes()->count() }} votes</div>
             <button class="btn-download"><i class="gg-software-download"></i></button>
         </div>
         <div class="report-attr">

@@ -22,7 +22,6 @@ class CreateReportsTable extends Migration
             $table->text('description');
             $table->string('author');
             $table->date('report_date');
-            $table->integer('votes')->default(0);
             $table->string('status')->default('Belum Ditindaklanjuti');
             $table->string('status_desc')->nullable();
             $table->string('photo')->nullable();

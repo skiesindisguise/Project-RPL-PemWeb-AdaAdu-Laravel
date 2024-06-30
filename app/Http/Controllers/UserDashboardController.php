@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Report;
 
 use Illuminate\Http\Request;
 
@@ -13,7 +14,8 @@ class UserDashboardController extends Controller
 
     public function show($id)
     {
-        // Logic to show specific user-related content
+        $report = Report::findOrFail($id);
+        return view('user.report-details', compact('report'));
     }
 
     // Other actions as needed

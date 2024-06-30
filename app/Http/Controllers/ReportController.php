@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Report;
 use App\Models\User;
+use App\Models\Vote;
 
 use Illuminate\View\View;
 
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Request as FacadesRequest;
 
@@ -83,5 +85,31 @@ class ReportController extends Controller
         else {
             return redirect()->route('admin.dashboard')->with('success', 'Laporan Berhasil Dihapus!');
         }
+    }
+
+    public function vote($id)
+    {
+        $report = Report::findOrFail($id);
+        $user = Auth::user();
+
+        $vote = Vote::where('report_id', $report->id)->where('user_id', $user->id)->first();
+
+        if ($vote) {
+            // Unvote
+            $vote->delete();
+            $message = 'Unvoted successfully';
+        } else {
+            // Vote
+            Vote::create([
+                'user_id' => $user->id,
+                'report_id' => $report->id,
+            ]);
+            $message = 'Voted successfully';
+        }
+
+        // Get the updated vote count
+        $votesCount = $report->votes()->count();
+
+        return response()->json(['success' => $message, 'votes_count' => $votesCount]);
     }
 }

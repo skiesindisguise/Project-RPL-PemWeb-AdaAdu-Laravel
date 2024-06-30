@@ -51,12 +51,12 @@
         </div>
 <!-- Sesuaikan view-report.blade.php jika diperlukan -->
         @foreach ($reports as $report)
-            <div class="report-card" data-date="{{ $report->report_date }}" data-votes="{{ $report->votes }}">
+            <div class="report-card" data-date="{{ $report->report_date }}" data-votes="{{ $report->votes()->count() }}">
                 <a href="{{ route('reports.show', $report->id) }}" style="text-decoration: none; color: inherit;">
                     <div class="report-grid">
                         <div class="grid-title">{{ $report->title }}</div>
                         <div class="grid-vote">
-                            <div class="vote-count">{{ $report->votes }}<br>vote</div>
+                            <div class="vote-count">{{ $report->votes()->count() }}<br>vote</div>
                             @if (auth()->user()->role == 'user')
                                 <button class="btn"><i class="fa-solid fa-circle-up fa-2xl" style="color: #1491ec;"></i></button>
                             @else
