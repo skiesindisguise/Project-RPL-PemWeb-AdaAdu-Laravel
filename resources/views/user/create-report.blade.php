@@ -61,5 +61,6 @@
         </form>        
         
     </div>
+    <script src={{ asset('js/reports/create-report.js') }}></script>
 </body>
 </html>

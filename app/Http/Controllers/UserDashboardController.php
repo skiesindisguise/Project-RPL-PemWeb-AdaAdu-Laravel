@@ -7,9 +7,21 @@ use Illuminate\Http\Request;
 
 class UserDashboardController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return view('user/dashboard');
+        $query = $request->input('query');
+
+        if ($query) {
+            $reports = Report::where('title', 'LIKE', "%{$query}%")
+                            ->orWhere('description', 'LIKE', "%{$query}%")
+                            ->orWhere('tag', 'LIKE', "%{$query}%")
+                            ->orWhere('author', 'LIKE', "%{$query}%")
+                            ->get();
+        } else {
+            $reports = Report::all();
+        }
+
+        return view('user.dashboard', compact('reports', 'query'));
     }
 
     public function show($id)

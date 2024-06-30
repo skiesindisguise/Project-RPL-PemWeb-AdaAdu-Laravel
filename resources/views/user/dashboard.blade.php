@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{{ asset('style/user/dashboard.css') }}">
     <script src="https://kit.fontawesome.com/22694d56fe.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="{{ asset('js/user/dashboard.js') }}"></script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body>
@@ -38,15 +39,15 @@
         <div class="title">Halo, {{ Auth::user()->name }}</div>
         <div class="sub-title">Berikut merupakan riwayat laporanmu</div>
         <div class="search-filter-bar">
-            <div class="search-bar">
-                <input type="text" id="search-input" placeholder="Search here">
-            </div>
-            <div class="filter-bar">
-                <select id="filter-option" onchange="filterReports()">
-                    <option value="newest">by latest</option>
-                    <option value="highest">by most vote</option>
-                </select>
-            </div>
+            <form method="GET" action="{{ route('user.dashboard') }}" class="search-bar">
+                <input type="text" name="query" id="search-input" placeholder="Search here" value="{{ request('query') }}">
+                <div class="filter-bar">
+                    <select id="filter-option" onchange="filterReports()">
+                        <option value="newest">by latest</option>
+                        <option value="highest">by most vote</option>
+                    </select>
+                </div>
+            </form>
         </div>
         @forelse (auth()->user()->reports as $report)
             <div class="report-card" data-date="{{ $report->report_date }}" data-votes="{{ $report->votes()->count() }}">
