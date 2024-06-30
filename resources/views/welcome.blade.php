@@ -21,9 +21,9 @@
             </div>
         </div>
         <div class="nav">
-            <a href="#main-section" class="buttn" id="home">Home</a>
-            <a href="#about-section" class="buttn" id="about">About</a>
-            <a href="#footer-contact" class="buttn" id="contact">Contact</a>
+            <a href="#main-section" class="buttn btnHome" id="home">Home</a>
+            <a href="#about-section" class="buttn btnAbout" id="about">About</a>
+            <a href="#footer-contact" class="buttn btnContact" id="contact">Contact</a>
             @if (Route::has('login'))
                 @auth
                     @can('isAdmin')
@@ -161,11 +161,9 @@
             <a href="#"><img src="{{ asset('images/logo-twitter-svg.svg') }}" alt="Twitter"></a>
         </div>
     </footer>
-    
-
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
 
+</body>
 </html>

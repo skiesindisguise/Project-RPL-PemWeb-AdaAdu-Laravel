@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: 'Poppins', sans-serif;
     margin: 0;
@@ -32,6 +36,75 @@ body {
     align-items: center;
     margin-right: 80px;
     font-size: 24px;
+}
+
+.btnHome {
+    position: relative;
+    transition: color 0.4s;
+}
+
+.btnHome::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #1491EC;
+    visibility: hidden;
+    transform: scaleX(0);
+    transition: all 0.3s ease-in-out;
+}
+
+.btnHome:hover::before {
+    visibility: visible;
+    transform: scaleX(1);
+}
+
+.btnAbout {
+    position: relative;
+    transition: color 0.4s;
+}
+
+.btnAbout::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #1491EC;
+    visibility: hidden;
+    transform: scaleX(0);
+    transition: all 0.3s ease-in-out;
+}
+
+.btnAbout:hover::before {
+    visibility: visible;
+    transform: scaleX(1);
+}
+
+.btnContact {
+    position: relative;
+    transition: color 0.4s;
+}
+
+.btnContact::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #1491EC;
+    visibility: hidden;
+    transform: scaleX(0);
+    transition: all 0.3s ease-in-out;
+}
+
+.btnContact:hover::before {
+    visibility: visible;
+    transform: scaleX(1);
 }
 
 #login {
@@ -82,10 +155,8 @@ body {
     font-size: 24px;
     transition: 0.4s;
 }
+
 .buttn:hover {
-    background-color: #1491EC;
-    color: white;
-    border-radius: 15px;
     text-decoration: none;
     transition: 0.4s;
 }
@@ -99,6 +170,7 @@ body {
     box-shadow: 6px 6px 24px 1px rgba(0, 0, 0, 15%);
     margin-left: auto;
     margin-right: auto;
+    margin-top: 50px;
 }
 
 .title-what-is-adaadu {
@@ -112,7 +184,7 @@ body {
 
 .adaadu-desc {
     font-size: 29px;
-    color: rgba(34, 34, 34, 0.7);
+    color: rgba(34, 34, 34, 0.8);
     text-align: justify;
     margin-top: 30px;
     margin-left: 150px;
@@ -164,11 +236,12 @@ body {
 }
 
 .testimonials-section .card {
-    margin-top: 40px;
+    margin-top: 50px;
     box-shadow: 8px 8px 20px 0px rgba(0, 0, 0, 7%);
     border: 1px solid #E5E5E5;
     width: 353px;
     height: 260px;
+    transition: all 0.4s ease;
 }
 
 .testimonials-section .card:hover {
@@ -177,8 +250,9 @@ body {
     border: 1px #E5E5E5;
     width: 355px;
     height: 263px;
-    transition: 0.4s;
+    transform: translateY(-10px);
 }
+
 
 .testimonials-section .card-body img {
     width: 80px;
@@ -192,7 +266,7 @@ body {
 
 .card-body .card-text {
     font-weight: lighter;
-    color: rgba(34, 34, 34, 0.7);
+    color: rgba(34, 34, 34, 0.8);
     text-align: justify;
     line-height: 35px;
     margin-top: 5px;
@@ -202,13 +276,14 @@ body {
     font-weight: bold;
     font-size: 58px;
     line-height: 104px;
+    margin-top: 50px;
 }
 
 .footer {
     background-color: #FFEFD5;
     padding: 20px 0;
     display: flex;
-    margin-top: 80px;
+    margin-top: 120px;
     justify-content: space-around;
     align-items: center;
     flex-wrap: wrap;
@@ -254,12 +329,14 @@ body {
     cursor: pointer;
     filter: opacity(50%);
     border-radius: 20%;
+    transition: all 0.3s ease;
 }
 
 .footer .social-icons img:hover {
     filter: none;
-    transition: all 300ms ease;
+    transform: scale(1.2);
 }
+
 
 .footer .social-icons {
     margin-top: -40px;
