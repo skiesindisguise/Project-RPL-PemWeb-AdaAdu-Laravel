@@ -111,11 +111,13 @@ body {
     padding: 20px;
     border-radius: 25px;
     margin-bottom: 50px;
-    box-shadow: 6px 6px 15px rgba(0, 0, 0, 0.2)
+    box-shadow: 6px 6px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s, box-shadow 0.3s;
 }
-.report-card:hover {
-    box-shadow: 6px 6px 15px rgba(50, 50, 50, 60%);
-    transition: 0.4s;
+.report-card:hover{
+    cursor: pointer;
+    transform: scale(1.01);
+    box-shadow: 6px 6px 15px rgba(0, 0, 0, 0.5);
 }
 .report-card .meta .report-title {
     font-size: 30px;
@@ -218,7 +220,11 @@ body {
     color: #444444;
     font-weight: 600;
 }
-
+.modal-report-title {
+    font-size: 30px;
+    color: #444444;
+    font-weight: 600;
+}
 .report-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;

@@ -50,28 +50,58 @@
         </div>
         @forelse (auth()->user()->reports as $report)
             <div class="report-card" data-date="{{ $report->report_date }}" data-votes="{{ $report->votes }}">
-                <a href="{{ route('reports.show', $report->id) }}" style="text-decoration: none; color: inherit;">
                     <div class="report-grid">
-                        <div class="grid-title">{{ $report->title }}</div>
+                        <a href="{{ route('reports.show', $report->id) }}" style="text-decoration: none; color: inherit;">
+                            <div class="grid-title">{{ $report->title }}</div>
+                        </a>
                         <div class="grid-vote">
                             <div class="vote-count">{{ $report->votes }}<br>vote</div>
-                            <button class="btn-trash"><i class="fa-solid fa-trash fa-2xl" style="color: #444444;"></i></button>
+                            <button class="btn-trash" data-toggle="modal" data-target="#deleteModal-{{ $report->id }}"><i class="fa-solid fa-trash fa-xl" style="color: #444444;"></i></button>
                         </div>
+                        <a href="{{ route('reports.show', $report->id) }}" style="text-decoration: none; color: inherit;">
                         <div class="grid-attr">
                             <div class="report-tag">{{ $report->tag }}</div>
                             <div class="report-author">{{ $report->author }}</div>
                             <div class="report-date">{{ \Carbon\Carbon::parse($report->report_date)->format('d M Y') }}</div>
                         </div>
+                        </a>
                         <div class="grid-status-wrapper">
                             <div class="grid-status {{ $report->status == 'Sedang Ditindaklanjuti' ? 'status-in-progress' : 'status-completed' }}">
                             {{ $report->status }}<br>{{ now()->format('d M Y') }}
                             </div>
                         </div>
                     </div>
+                    <a href="{{ route('reports.show', $report->id) }}" style="text-decoration: none; color: inherit;">
                     <div class="report-desc">
                         <p>{{ \Illuminate\Support\Str::limit($report->description, 500) }}</p>
                     </div>
-                </a>
+                    </a>
+                
+            </div>
+            <!-- Modal -->
+            <div class="modal fade" id="deleteModal-{{ $report->id }}" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title">Konfirmasi Penghapusan Laporan</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        </div>
+                        <div class="modal-body">
+                            <div>Hapus laporan ini?</div>
+                            <div class="modal-report-title" id="modal-report-title">{{ $report->title }}</div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            <form action="{{ route('reports.destroy', $report->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-delete">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
         @empty
             <div class="alert alert-danger">
@@ -82,34 +112,29 @@
             <i class="fa-solid fa-circle-plus fa-2xl" style="color: #1491ec;"></i>
         </a>
     </div>
-    <!-- Modal -->
-    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">Konfirmasi</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-                <div>Hapus laporan ini?</div>
-                <div class="report-title" id="modal-report-title"></div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-delete" data-dismiss="modal">Delete</button>
-              </div>
-          </div>
-        </div>
-    </div>
-      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>  
-      <script>
-        document.getElementById('createReportButton').addEventListener('click', function() {
-            window.location.href = "{{ route('reports.create') }}";
-        });
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        //message with sweetalert
+        @if(session('success'))
+            Swal.fire({
+                icon: "success",
+                title: "BERHASIL",
+                text: "{{ session('success') }}",
+                showConfirmButton: false,
+                timer: 2000
+            });
+        @elseif(session('error'))
+            Swal.fire({
+                icon: "error",
+                title: "GAGAL!",
+                text: "{{ session('error') }}",
+                showConfirmButton: false,
+                timer: 2000
+            });
+        @endif
     </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>  
 </body>
 </html>

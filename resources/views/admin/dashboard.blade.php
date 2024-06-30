@@ -24,7 +24,7 @@
             </div>
         </div>
         <div class="nav">
-            <a href="{{ route('admin.viewreport') }}" class="buttn" id="viewReportButton">View Report</a>
+            <a href="{{ route('all.viewreport') }}" class="buttn" id="viewReportButton">View Report</a>
             <a href="{{ route('admin.dashboard') }}" class="buttn" id="dashboardButton">Dashboard</a>
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
@@ -77,7 +77,27 @@
             </div>
         @endforeach
     </div>
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        //message with sweetalert
+        @if(session('success'))
+            Swal.fire({
+                icon: "success",
+                title: "BERHASIL",
+                text: "{{ session('success') }}",
+                showConfirmButton: false,
+                timer: 2000
+            });
+        @elseif(session('error'))
+            Swal.fire({
+                icon: "error",
+                title: "GAGAL!",
+                text: "{{ session('error') }}",
+                showConfirmButton: false,
+                timer: 2000
+            });
+        @endif
+    </script>
     <script>
         $(document).ready(function() {
             $('#updateForm').submit(function(e) {

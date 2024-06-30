@@ -64,6 +64,11 @@ body {
     color: #444444;
     font-weight: 600;
 }
+.modal-report-title {
+    font-size: 30px;
+    color: #444444;
+    font-weight: 600;
+}
 .report-attr {
     color: #888;
     margin-bottom: 10px;
@@ -141,6 +146,14 @@ body {
     cursor: pointer;
     border-radius: 25px;
     font-size: 16px;
+}
+.btn-trash {
+    background-color: transparent;
+    border: none;
+    color: black;
+    padding: 12px 16px;
+    margin-left: 10px;
+    cursor: pointer;
 }
 .btn-update {
     background-color: #2E4DEC;

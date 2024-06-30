@@ -19,15 +19,13 @@ Route::get('/admin/reportdetails/{id}', [AdminDashboardController::class, 'show'
 
 Route::post('/admin/reportdetails/update/{id}', [AdminDashboardController::class, 'update'])->middleware(['auth', 'admin', 'can:isAdmin', 'verified'])->name('report.update');
 
-Route::get('/admin/reportdetails-umum/{id}', [AdminDashboardController::class, 'showUmum'])->middleware(['auth', 'admin', 'can:isAdmin', 'verified'])->name('report.details.umum');
-
 Route::resource('/reports', ReportController::class);
 
 // Tambahkan route ini di web.php
-Route::get('/admin/viewreport', function () {
+Route::get('/viewreport', function () {
     $reports = \App\Models\Report::all(); // Sesuaikan dengan logika untuk mendapatkan laporan
-    return view('admin/view-report', compact('reports'));
-})->middleware(['auth', 'admin', 'can:isAdmin', 'verified'])->name('admin.viewreport');
+    return view('/view-report', compact('reports'));
+})->middleware(['auth', 'verified'])->name('all.viewreport');
 
 
 Route::middleware('auth')->group(function () {

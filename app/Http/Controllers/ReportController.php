@@ -11,6 +11,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Request as FacadesRequest;
 
 class ReportController extends Controller
 {
@@ -54,7 +55,16 @@ class ReportController extends Controller
     public function show(string $id): View
     {
         $report = Report::findOrFail($id);
-
+        $accessedFrom = url()->previous();
+        if (strpos($accessedFrom, 'admin/dashboard') !== false) {
+            return view('admin.report-details', compact('report'));
+        } 
+        elseif (strpos($accessedFrom, '/viewreport') !== false) {
+            return view('report-details', compact('report'));
+        }
+        elseif (strpos($accessedFrom, 'user/dashboard') !== false) {
+            return view('user.report-details', compact('report'));
+        } 
         return view('report-details', compact('report'));
     }
 
@@ -67,7 +77,11 @@ class ReportController extends Controller
         Storage::delete('public/reports/user'. $user->id . '/'. $report->photo);
 
         $report->delete();
-
-        return redirect()->route('reports.index');
+        if ($user->role == 'user') {
+            return redirect()->route('user.dashboard')->with('success', 'Laporan Berhasil Dihapus!');
+        }
+        else {
+            return redirect()->route('admin.dashboard')->with('success', 'Laporan Berhasil Dihapus!');
+        }
     }
 }

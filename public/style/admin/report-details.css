@@ -86,6 +86,11 @@ body {
     color: #444444;
     font-weight: 600;
 }
+.modal-report-title {
+    font-size: 30px;
+    color: #444444;
+    font-weight: 600;
+}
 .report-attr {
     color: #888;
     margin-bottom: 10px;

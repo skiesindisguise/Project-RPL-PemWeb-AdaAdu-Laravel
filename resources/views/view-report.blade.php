@@ -11,6 +11,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
     <script src="{{ asset('js/admin/dashboard.js') }}"></script>
+    <script src="https://kit.fontawesome.com/22694d56fe.js" crossorigin="anonymous"></script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body>
@@ -24,7 +25,7 @@
             </div>
         </div>
         <div class="nav">
-            <a href="{{ route('admin.viewreport') }}" class="buttn" id="viewReportButton">View Report</a>
+            <a href="{{ route('all.viewreport') }}" class="buttn" id="viewReportButton">View Report</a>
             <a href="{{ route('admin.dashboard') }}" class="buttn" id="dashboardButton">Dashboard</a>
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
@@ -51,12 +52,16 @@
 <!-- Sesuaikan view-report.blade.php jika diperlukan -->
         @foreach ($reports as $report)
             <div class="report-card" data-date="{{ $report->report_date }}" data-votes="{{ $report->votes }}">
-                <a href="{{ route('report.details.umum', ['id' => $report->id]) }}" style="text-decoration: none; color: inherit;">
+                <a href="{{ route('reports.show', $report->id) }}" style="text-decoration: none; color: inherit;">
                     <div class="report-grid">
                         <div class="grid-title">{{ $report->title }}</div>
                         <div class="grid-vote">
                             <div class="vote-count">{{ $report->votes }}<br>vote</div>
-                            <button class="btn" onclick="event.stopPropagation();"><i class="gg-software-download"></i></button>
+                            @if (auth()->user()->role == 'user')
+                                <button class="btn"><i class="fa-solid fa-circle-up fa-2xl" style="color: #1491ec;"></i></button>
+                            @else
+                            <button class="btn"><i class="fa-solid fa-circle-up fa-2xl" style="color: #4444;"></i></button>
+                            @endif
                         </div>
                         <div class="grid-attr">
                             <div class="report-tag">{{ $report->tag }}</div>
