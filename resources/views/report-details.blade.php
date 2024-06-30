@@ -48,8 +48,12 @@
     <div class="container">
         <div class="report-title" id="report-title">{{ $report->title }}</div>
         <div class="vote-download">
-            <div class="vote-count" id="vote-count">{{ $report->vote_count }} votes</div>
-            <button class="vote-btn" data-report-id="{{ $report->id }}"><i class="fa-solid fa-circle-up fa-2xl" style="color: #1491ec;"></i></button>
+            <div class="vote-count" id="vote-count">{{ $report->votes }} votes</div>
+            @if (auth()->user()->role == 'user')
+                <button class="vote-btn" data-report-id="{{ $report->id }}"><i class="fa-solid fa-circle-up fa-2xl" style="color: #1491ec;"></i></button>
+            @else
+                <button class="btn"><i class="fa-solid fa-circle-up fa-2xl" style="color: #4444;"></i></button>
+                @endif
         </div>
         <div class="report-attr">
             <div id="report-tag">{{ $report->tag }}</div>

@@ -50,13 +50,13 @@
             </form>
         </div>
         @forelse (auth()->user()->reports as $report)
-            <div class="report-card" data-date="{{ $report->report_date }}" data-votes="{{ $report->votes()->count() }}">
+            <div class="report-card" data-date="{{ $report->report_date }}" data-votes="{{ $report->votes}}">
                     <div class="report-grid">
                         <a href="{{ route('reports.show', $report->id) }}" style="text-decoration: none; color: inherit;">
                             <div class="grid-title">{{ $report->title }}</div>
                         </a>
                         <div class="grid-vote">
-                            <div class="vote-count">{{ $report->votes()->count() }}<br>vote</div>
+                            <div class="vote-count">{{ $report->votes}}<br>vote</div>
                             <button class="btn-trash" data-toggle="modal" data-target="#deleteModal-{{ $report->id }}"><i class="fa-solid fa-trash fa-xl" style="color: #444444;"></i></button>
                         </div>
                         <a href="{{ route('reports.show', $report->id) }}" style="text-decoration: none; color: inherit;">

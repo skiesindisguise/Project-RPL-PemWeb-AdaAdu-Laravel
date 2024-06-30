@@ -11,9 +11,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/reports/{id}/votes-count', [ReportController::class, 'getVotesCount']);
+
 Route::get('/user/dashboard', [UserDashboardController::class, 'index'])->middleware(['auth', 'user', 'can:isUser', 'verified'])->name('user.dashboard');
 
 Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->middleware(['auth', 'admin', 'can:isAdmin', 'verified'])->name('admin.dashboard');
+
+Route::get('view-report', [ReportController::class, 'index'])->name('viewwreport');
 
 Route::get('/admin/reportdetails/{id}', [AdminDashboardController::class, 'show'])->middleware(['auth', 'admin', 'can:isAdmin', 'verified'])->name('report.details');
 

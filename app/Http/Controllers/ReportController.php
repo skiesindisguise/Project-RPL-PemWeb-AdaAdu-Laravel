@@ -22,6 +22,22 @@ class ReportController extends Controller
         return view('user.create-report');
     }
 
+    public function index(Request $request)
+    {
+        $query = $request->input('query');
+
+        if ($query) {
+            $reports = Report::where('title', 'LIKE', "%{$query}%")
+                            ->orWhere('description', 'LIKE', "%{$query}%")
+                            ->orWhere('tag', 'LIKE', "%{$query}%")
+                            ->orWhere('author', 'LIKE', "%{$query}%")
+                            ->get();
+        } else {
+            $reports = Report::all();
+        }
+
+        return view('view-report', compact('reports', 'query'));
+    }
     public function store(Request $request): RedirectResponse
     {
         $user = auth()->user();
@@ -107,9 +123,16 @@ class ReportController extends Controller
             $message = 'Voted successfully';
         }
 
-        // Get the updated vote count
-        $votesCount = $report->votes()->count();
+        // Update vote count in the reports table
+        $report->updateVoteCount();
 
-        return response()->json(['success' => $message, 'votes_count' => $votesCount]);
+        return response()->json(['success' => $message, 'votes_count' => $report->votes]);
+    }
+
+    public function getVotesCount($id)
+    {
+        $report = Report::findOrFail($id);
+        $votesCount = $report->votes()->count();
+        return response()->json(['votes_count' => $votesCount]);
     }
 }

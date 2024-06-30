@@ -10,7 +10,7 @@ class Report extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title', 'anonymous', 'public', 'tag', 'description', 'author', 'report_date', 'photo', 'status', 'status_desc', 'user_id',
+        'title', 'anonymous', 'public', 'tag', 'description', 'author', 'report_date','votes', 'photo', 'status', 'status_desc', 'user_id',
     ];
 
     public function user()
@@ -23,8 +23,9 @@ class Report extends Model
         return $this->hasMany(Vote::class);
     }
 
-    public function getVoteCountAttribute()
+    public function updateVoteCount()
     {
-        return $this->votes()->count();
+        $this->votes = $this->votes()->count();
+        $this->save();
     }
 }

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Fasilitas</title>
+    <title>View Report</title>
     <link href='https://unpkg.com/css.gg@2.0.0/icons/css/software-download.css' rel='stylesheet'>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -39,7 +39,7 @@
     </div>
     <div class="container">
         <div class="search-filter-bar">
-            <form method="GET" action="{{ route('admin.dashboard') }}" class="search-bar">
+            <form method="GET" action="{{ route('viewwreport') }}" class="search-bar">
                 <input type="text" name="query" id="search-input" placeholder="Search here" value="{{ request('query') }}">
                 <div class="filter-bar">
                     <select id="filter-option" onchange="filterReports()">
@@ -49,18 +49,17 @@
                 </div>
             </form>
         </div>
-<!-- Sesuaikan view-report.blade.php jika diperlukan -->
         @foreach ($reports as $report)
-            <div class="report-card" data-date="{{ $report->report_date }}" data-votes="{{ $report->votes()->count() }}">
+            <div class="report-card" data-date="{{ $report->report_date }}" data-votes="{{ $report->votes}}" data-id="{{ $report->id }}">
                 <a href="{{ route('reports.show', $report->id) }}" style="text-decoration: none; color: inherit;">
                     <div class="report-grid">
                         <div class="grid-title">{{ $report->title }}</div>
                         <div class="grid-vote">
-                            <div class="vote-count">{{ $report->votes()->count() }}<br>vote</div>
+                            <div class="vote-count" id="vote-count-{{ $report->id }}">{{ $report->votes}}<br>vote</div>
                             @if (auth()->user()->role == 'user')
                                 <button class="btn"><i class="fa-solid fa-circle-up fa-2xl" style="color: #1491ec;"></i></button>
                             @else
-                            <button class="btn"><i class="fa-solid fa-circle-up fa-2xl" style="color: #4444;"></i></button>
+                                <button class="btn"><i class="fa-solid fa-circle-up fa-2xl" style="color: #4444;"></i></button>
                             @endif
                         </div>
                         <div class="grid-attr">
@@ -80,7 +79,28 @@
                 </a>
             </div>
         @endforeach
-
     </div>
+    <script>
+        $(document).ready(function() {
+            // Function to update vote counts
+            function updateVoteCounts() {
+                $('.report-card').each(function() {
+                    var reportId = $(this).data('id');
+                    $.ajax({
+                        url: '/reports/' + reportId + '/votes-count',
+                        method: 'GET',
+                        success: function(response) {
+                            $('#vote-count-' + reportId).html(response.votes_count + '<br>vote');
+                        },
+                        error: function(response) {
+                            console.log(response);
+                        }
+                    });
+                });
+            }
+
+            setInterval(updateVoteCounts, 5000);
+        });
+    </script>
 </body>
 </html>

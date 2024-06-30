@@ -51,12 +51,12 @@
             </form>
         </div>
         @foreach ($reports as $report)
-            <div class="report-card" data-date="{{ $report->report_date }}" data-votes="{{ $report->votes()->count() }}">
+            <div class="report-card" data-date="{{ $report->report_date }}" data-votes="{{ $report->votes }}">
                 <a href="{{ route('report.details', ['id' => $report->id]) }}" style="text-decoration: none; color: inherit;">
                     <div class="report-grid">
                         <div class="grid-title">{{ $report->title }}</div>
                         <div class="grid-vote">
-                            <div class="vote-count">{{ $report->votes()->count() }}<br>vote</div>
+                            <div class="vote-count">{{ $report->votes }}<br>vote</div>
                             <button class="btn" onclick="event.stopPropagation();"><i class="gg-software-download"></i></button>
                         </div>
                         <div class="grid-attr">

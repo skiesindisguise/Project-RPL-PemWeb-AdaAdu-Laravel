@@ -29,7 +29,7 @@
     <div class="container">
         <div class="report-title" id="report-title">{{ $report->title }}</div>
         <div class="vote-download">
-            <div class="vote-count">{{ $report->votes()->count() }}<br>vote</div>
+            <div class="vote-count">{{ $report->votes }}<br>vote</div>
             <button class="btn vote-btn" data-report-id="{{ $report->id }}"><i class="fa-solid fa-circle-up fa-2xl" style="color: #1491ec;"></i></button>
             <button class="btn-trash" data-toggle="modal" data-target="#deleteModal-{{ $report->id }}"><i class="fa-solid fa-trash fa-xl" style="color: #444444;"></i></button>
         </div>
