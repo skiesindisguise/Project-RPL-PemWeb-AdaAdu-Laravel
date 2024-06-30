@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Request as FacadesRequest;
 
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
+
 class ReportController extends Controller
 {
     public function create(): View
@@ -134,5 +136,11 @@ class ReportController extends Controller
         $report = Report::findOrFail($id);
         $votesCount = $report->votes()->count();
         return response()->json(['votes_count' => $votesCount]);
+    }
+
+    public function download($id) {
+        $report = Report::findOrFail($id);
+        $pdf = PDF::loadView('reports.pdf', compact('report'));
+        return $pdf->download('report_' . $report->id . '.pdf');
     }
 }

@@ -39,7 +39,7 @@
         <div class="report-title" id="report-title">{{ $report->title }}</div>
         <div class="vote-download">
             <div class="vote-count" id="vote-count">{{ $report->votes }} votes</div>
-            <button class="btn-download"><i class="gg-software-download"></i></button>
+            <a class="btn-download" href="{{ route('reports.download', $report->id) }}"><i class="gg-software-download"></i></a>
         </div>
         <div class="report-attr">
             <div id="report-tag">{{ $report->tag }}</div>

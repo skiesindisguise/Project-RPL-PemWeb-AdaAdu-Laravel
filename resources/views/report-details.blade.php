@@ -128,6 +128,26 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
         $(document).ready(function() {
+            // Function to update vote counts
+            function updateVoteCounts() {
+                $('.report-card').each(function() {
+                    var reportId = $(this).data('id');
+                    $.ajax({
+                        url: '/reports/' + reportId + '/votes-count',
+                        method: 'GET',
+                        success: function(response) {
+                            $('#vote-count-' + reportId).html(response.votes_count + '<br>vote');
+                        },
+                        error: function(response) {
+                            console.log(response);
+                        }
+                    });
+                });
+            }
+
+            setInterval(updateVoteCounts, 5000);
+        });
+        $(document).ready(function() {
             $('.vote-btn').on('click', function() {
                 var button = $(this);
                 var reportId = button.data('report-id');

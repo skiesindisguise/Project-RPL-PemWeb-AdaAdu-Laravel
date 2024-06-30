@@ -176,7 +176,15 @@ body {
     background-color: #DED9D9;
     color: #444444;
 }
-
+.status-in-progress {
+    background-color: #FFE5A0;
+}
+.status-completed {
+    background-color: #C4FFC3;
+}
+.status-not-in-progress {
+    background-color: #DED9D9;
+}
 .report-card .report-desc {
     margin-left: 30px;
     margin-right: 30px;
@@ -293,4 +301,24 @@ body {
     border-radius: 25px;
     width: 210px;
     height: max-content;
+}
+.modal-grid-status {
+    grid-column: 2 / 4;
+    grid-row: 2 / 3;
+    text-align: center;
+    padding: 10px;
+    border-radius: 25px;
+    width: 210px;
+    height: max-content;
+}
+.modal-status-report {
+    border-radius: 5px;
+    color: #444444;
+    border: none;
+    right: 35px;
+    top: 75px;
+    width: 210px;
+    margin-bottom: 10px;
+    height: max-content;
+    text-align: center;
 }

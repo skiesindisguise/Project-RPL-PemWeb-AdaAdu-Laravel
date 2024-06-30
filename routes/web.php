@@ -25,6 +25,8 @@ Route::post('/admin/reportdetails/update/{id}', [AdminDashboardController::class
 
 Route::resource('/reports', ReportController::class);
 
+Route::get('/reports/{id}/download', [ReportController::class, 'download'])->name('reports.download');
+
 // Tambahkan route ini di web.php
 Route::get('/viewreport', function () {
     $reports = \App\Models\Report::all(); // Sesuaikan dengan logika untuk mendapatkan laporan
