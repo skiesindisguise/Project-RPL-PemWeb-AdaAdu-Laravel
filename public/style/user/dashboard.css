@@ -265,6 +265,7 @@ body {
     grid-row: 2 / 3;
     text-align: center;
     padding: 10px;
+    margin-left: auto;
     border-radius: 25px;
     width: 210px;
     height: max-content;
