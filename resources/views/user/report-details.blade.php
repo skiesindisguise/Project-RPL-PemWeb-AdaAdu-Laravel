@@ -27,6 +27,14 @@
         <div class="nav">
             <a href="{{ route('all.viewreport') }}" class="buttn">View Report</a>
             <a href="{{ route('user.dashboard') }}" class="buttn">Dashboard</a>
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <a :href="route('logout')" class="buttnlogout"
+                    onclick="event.preventDefault();
+                                    this.closest('form').submit();">
+                    {{ __('Log Out') }}
+                </a>
+            </form>
         </div>
     </div>
     <div class="container">
