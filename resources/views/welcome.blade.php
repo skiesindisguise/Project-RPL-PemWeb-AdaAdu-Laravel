@@ -169,6 +169,7 @@
         ScrollReveal().reveal('.main-section', { delay: 1000 });
         ScrollReveal().reveal('.bg-main-content', { delay: 1000 });
         ScrollReveal().reveal('.testimonials-section', { delay: 1000 });
+        ScrollReveal().reveal('.footer-section', { delay: 1000 });
     </script>
 </body>
 </html>
