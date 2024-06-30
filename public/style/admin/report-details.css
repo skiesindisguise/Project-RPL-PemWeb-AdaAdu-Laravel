@@ -120,8 +120,8 @@ body {
 .status-completed {
     background-color: #C4FFC3;
 }
-.status-belum-ditindaklanjuti {
-    background-color: #f78480;
+.status-not-in-progress {
+    background-color: #DED9D9;
 }
 
 .report-desc {
@@ -208,7 +208,17 @@ body {
     background-color: #C4FFC3;
 }
 .modal-c{
-    background-color: #f78480;
+    background-color: #DED9D9;
+}
+
+.grid-status {
+    grid-column: 2 / 4;
+    grid-row: 2 / 3;
+    text-align: center;
+    padding: 10px;
+    border-radius: 25px;
+    width: 210px;
+    height: max-content;
 }
 
 .modal-status-report {

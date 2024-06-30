@@ -51,43 +51,47 @@
         </div>
         @forelse (auth()->user()->reports as $report)
             <div class="report-card" data-date="{{ $report->report_date }}" data-votes="{{ $report->votes}}">
-                    <div class="report-grid">
-                        <a href="{{ route('reports.show', $report->id) }}" style="text-decoration: none; color: inherit;">
-                            <div class="grid-title">{{ $report->title }}</div>
-                        </a>
-                        <div class="grid-vote">
-                            <div class="vote-count">{{ $report->votes}}<br>vote</div>
-                            <button class="btn-trash" data-toggle="modal" data-target="#deleteModal-{{ $report->id }}"><i class="fa-solid fa-trash fa-xl" style="color: #444444;"></i></button>
-                        </div>
-                        <a href="{{ route('reports.show', $report->id) }}" style="text-decoration: none; color: inherit;">
+                <div class="report-grid">
+                    <a href="{{ route('reports.show', $report->id) }}" style="text-decoration: none; color: inherit;">
+                        <div class="grid-title">{{ $report->title }}</div>
+                    </a>
+                    <div class="grid-vote">
+                        <div class="vote-count">{{ $report->votes}}<br>vote</div>
+                        <button class="btn-trash" data-toggle="modal" data-target="#deleteModal-{{ $report->id }}"><i class="fa-solid fa-trash fa-xl" style="color: #444444;"></i></button>
+                    </div>
+                    <a href="{{ route('reports.show', $report->id) }}" style="text-decoration: none; color: inherit;">
                         <div class="grid-attr">
                             <div class="report-tag">{{ $report->tag }}</div>
                             <div class="report-author">{{ $report->author }}</div>
                             <div class="report-date">{{ \Carbon\Carbon::parse($report->report_date)->format('d M Y') }}</div>
                         </div>
-                        </a>
-                        <div class="grid-status-wrapper">
-                            <div class="grid-status {{ $report->status == 'Sedang Ditindaklanjuti' ? 'status-in-progress' : 'status-completed' }}">
-                            {{ $report->status }}<br>{{ now()->format('d M Y') }}
-                            </div>
+                    </a>
+                    <div class="grid-status-wrapper">
+                        <div class="grid-status 
+                            {{ $report->status == 'Sedang Ditindaklanjuti' ? 'status-in-progress' : 
+                            ($report->status == 'Belum Ditindaklanjuti' ? 'status-not-in-progress' : 'status-completed') }}">
+                            {{ $report->status }}<br>
+                            @if($report->status != 'Belum Ditindaklanjuti')
+                                {{ now()->format('d M Y') }}
+                            @endif
                         </div>
                     </div>
-                    <a href="{{ route('reports.show', $report->id) }}" style="text-decoration: none; color: inherit;">
+                </div>
+                <a href="{{ route('reports.show', $report->id) }}" style="text-decoration: none; color: inherit;">
                     <div class="report-desc">
                         <p>{{ \Illuminate\Support\Str::limit($report->description, 500) }}</p>
                     </div>
-                    </a>
-                
+                </a>
             </div>
             <!-- Modal -->
             <div class="modal fade" id="deleteModal-{{ $report->id }}" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                        <h5 class="modal-title">Konfirmasi Penghapusan Laporan</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                            <h5 class="modal-title">Konfirmasi Penghapusan Laporan</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
                         </div>
                         <div class="modal-body">
                             <div>Hapus laporan ini?</div>

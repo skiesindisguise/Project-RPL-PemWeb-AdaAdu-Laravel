@@ -30,6 +30,7 @@
                         <label for="password">Password</label>
                         <div class="password-container">
                             <input type="password" id="password" name="password" required autocomplete="current-password">
+                            <span id="togglePassword" class="toggle-password">Show</span>
                             <x-input-error :messages="$errors->get('password')" class="mt-2" />
                         </div>
                     </div>
@@ -38,5 +39,6 @@
             </div>
         </div>
     </div>
+    <script src="{{ asset('js/login/login.js') }}"></script>
 </body>
 </html>

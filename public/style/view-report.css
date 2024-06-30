@@ -131,6 +131,10 @@ body {
     background-color: #C4FFC3;
     color: #444444;
 }
+.report-card .status-not-in-progress {
+    background-color: #DED9D9;
+    color: #444444;
+}
 .report-card .report-desc {
     margin-left: 30px;
     margin-right: 30px;

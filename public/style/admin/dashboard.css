@@ -173,6 +173,10 @@ body {
 .status-completed {
     background-color: #C4FFC3;
 }
+.status-not-in-progress {
+    background-color: #DED9D9;
+}
+
 .report-desc {
     margin-top: 20px;
     color: #666;

@@ -68,8 +68,13 @@
                             <div class="report-date">{{ \Carbon\Carbon::parse($report->report_date)->format('d M Y') }}</div>
                         </div>
                         <div class="grid-status-wrapper">
-                            <div class="grid-status {{ $report->status == 'Sedang Ditindaklanjuti' ? 'status-in-progress' : 'status-completed' }}">
-                                {{ $report->status }}<br>{{ now()->format('d M Y') }}
+                            <div class="grid-status 
+                                {{ $report->status == 'Sedang Ditindaklanjuti' ? 'status-in-progress' : 
+                                ($report->status == 'Belum Ditindaklanjuti' ? 'status-not-in-progress' : 'status-completed') }}">
+                                {{ $report->status }}<br>
+                                @if($report->status != 'Belum Ditindaklanjuti')
+                                    {{ now()->format('d M Y') }}
+                                @endif
                             </div>
                         </div>
                     </div>
