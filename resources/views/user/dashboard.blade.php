@@ -51,7 +51,7 @@
         @forelse (auth()->user()->reports as $report)
             <div class="report-card" data-date="{{ $report->report_date }}" data-votes="{{ $report->votes()->count() }}">
                     <div class="report-grid">
-                        <a href="{{ route('user.report.details', ['id' => $report->id]) }}" style="text-decoration: none; color: inherit;">
+                        <a href="{{ route('reports.show', $report->id) }}" style="text-decoration: none; color: inherit;">
                             <div class="grid-title">{{ $report->title }}</div>
                         </a>
                         <div class="grid-vote">
@@ -71,7 +71,7 @@
                             </div>
                         </div>
                     </div>
-                    <a href="{{ route('user.report.details', ['id' => $report->id]) }}" style="text-decoration: none; color: inherit;">
+                    <a href="{{ route('reports.show', $report->id) }}" style="text-decoration: none; color: inherit;">
                     <div class="report-desc">
                         <p>{{ \Illuminate\Support\Str::limit($report->description, 500) }}</p>
                     </div>

@@ -13,8 +13,6 @@ Route::get('/', function () {
 
 Route::get('/user/dashboard', [UserDashboardController::class, 'index'])->middleware(['auth', 'user', 'can:isUser', 'verified'])->name('user.dashboard');
 
-Route::get('/user/report-details/{id}', [UserDashboardController::class, 'show'])->middleware(['auth', 'user', 'can:isUser', 'verified'])->name('user.report.details');
-
 Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->middleware(['auth', 'admin', 'can:isAdmin', 'verified'])->name('admin.dashboard');
 
 Route::get('/admin/reportdetails/{id}', [AdminDashboardController::class, 'show'])->middleware(['auth', 'admin', 'can:isAdmin', 'verified'])->name('report.details');
