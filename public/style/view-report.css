@@ -41,9 +41,9 @@ body {
     margin-left: 30px;
     margin-right: 50px;
     cursor: pointer;
-    text-decoration: none;
     font-size: 18px;
-    transition: color 0.4s;
+    text-decoration: none;
+    transition: 0.4s;
 }
 
 .buttn::before {
@@ -60,6 +60,7 @@ body {
 }
 .buttn:hover::before {
     visibility: visible;
+    text-decoration: none;
     transform: scaleX(1);
 }
 
@@ -207,6 +208,7 @@ body {
 }
 .btn:hover {
     color: gray;
+    text-decoration: none;
 }
 .modal-a{
     background-color: #FFE5A0;

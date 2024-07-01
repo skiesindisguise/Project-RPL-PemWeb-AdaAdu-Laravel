@@ -211,6 +211,7 @@ body {
 }
 .btn:hover {
     color: gray;
+    text-decoration: none;
 }
 
 .btn-trash {

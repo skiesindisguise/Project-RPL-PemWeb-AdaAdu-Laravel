@@ -216,6 +216,7 @@ body {
 }
 .btn:hover {
     opacity: 0.8;
+    text-decoration: none;
 }
 .btn.btn-secondary {
     background-color: #2E4DEC;

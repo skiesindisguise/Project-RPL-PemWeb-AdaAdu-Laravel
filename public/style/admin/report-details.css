@@ -218,6 +218,7 @@ body {
 }
 .btn-download:hover {
     color: gray;
+    text-decoration: none;
 }
 .modal-a{
     background-color: #FFE5A0;
