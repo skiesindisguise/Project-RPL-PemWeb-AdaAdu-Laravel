@@ -14,7 +14,7 @@
             <img src="{{ asset('images/logo-uns-svg.svg') }}" alt="Logo">
         </div>
         <div class="nav-links">
-            <a href="#">View Report</a>
+            <a href="{{ route('viewwreport') }}" class="buttn">View Report</a>
             <a href="{{ route('user.dashboard') }}" class="dashboard">Dashboard</a>
         </div>
     </div>
