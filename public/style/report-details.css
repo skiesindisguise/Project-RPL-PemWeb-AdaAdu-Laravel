@@ -99,6 +99,7 @@ body {
     border-radius: 15px;
 }
 .report-title {
+    margin-right: 320px;
     font-size: 30px;
     color: #444444;
     font-weight: 600;
