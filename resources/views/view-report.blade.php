@@ -72,14 +72,11 @@
                             </div>
                         </a>
                         <div class="grid-status-wrapper">
-                            <div
-                            class="grid-status {{ $report->status == 'Sedang Ditindaklanjuti' ? 'status-in-progress' : ($report->status == 'Belum Ditindaklanjuti' ? 'status-not-in-progress' : 'status-completed') }}">
-                            {{ $report->status }}
-                            @if($report->status != 'Belum Ditindaklanjuti')
-                                <br>{{ now()->format('d M Y') }}
-                            @endif
-                        </div>
-                        
+                            <div class="grid-status {{ $report->status == 'Sedang Ditindaklanjuti' ? 'status-in-progress' : 
+                                ($report->status == 'Belum Ditindaklanjuti' ? 'status-not-in-progress' : 'status-completed') }}" 
+                                id="report-status" data-toggle="modal" data-target="#statusModal-{{ $report->id }}">
+                                {{ $report->status }}<br>{{ now()->format('d M Y') }}
+                            </div>
                         </div>
                     </div>
                     <a href="{{ route('reports.show', $report->id) }}" style="text-decoration: none; color: inherit;">
@@ -102,14 +99,11 @@
                             <div class="report-title" id="modal-report-title"></div>
                             <div class="modal-status" id="modal-report-status"></div>
                             <div class="grid-status-wrapper">
-                                <div
-                                class="grid-status {{ $report->status == 'Sedang Ditindaklanjuti' ? 'status-in-progress' : ($report->status == 'Belum Ditindaklanjuti' ? 'status-not-in-progress' : 'status-completed') }}">
-                                {{ $report->status }}
-                                @if($report->status != 'Belum Ditindaklanjuti')
-                                    <br>{{ now()->format('d M Y') }}
-                                @endif
+                                <div class="grid-status 
+                                {{ $report->status == 'Sedang Ditindaklanjuti' ? 'status-in-progress' : 
+                                ($report->status == 'Belum Ditindaklanjuti' ? 'status-not-in-progress' : 'status-completed') }}">
+                                {{ $report->status }}<br>{{ now()->format('d M Y') }}
                             </div>
-                            
                                 <div class="modal-status-desc">
                                     <br>
                                     <p>Informasi:<br>{{ $report->status_desc }}</p>
