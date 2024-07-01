@@ -99,7 +99,7 @@
                             <div class="report-title" id="modal-report-title"></div>
                             <div class="modal-status" id="modal-report-status"></div>
                             <div class="grid-status-wrapper">
-                                <div class="grid-status 
+                                <div class="modal-grid-status 
                                 {{ $report->status == 'Sedang Ditindaklanjuti' ? 'status-in-progress' : 
                                 ($report->status == 'Belum Ditindaklanjuti' ? 'status-not-in-progress' : 'status-completed') }}">
                                 {{ $report->status }}<br>{{ now()->format('d M Y') }}

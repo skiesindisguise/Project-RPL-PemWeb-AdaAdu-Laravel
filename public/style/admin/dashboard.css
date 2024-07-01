@@ -177,8 +177,17 @@ body {
     border-radius: 25px;
     width: 210px;
     height: max-content;
+    margin-left: auto;
 }
-    
+.modal-grid-status {
+    grid-column: 2 / 4;
+    grid-row: 2 / 3;
+    text-align: center;
+    padding: 10px;
+    border-radius: 25px;
+    width: 210px;
+    height: max-content;
+}
 .status-in-progress {
     background-color: #FFE5A0;
 }
